@@ -23,7 +23,7 @@ const router = () => {
     })
     let main:HTMLDivElement = document.getElementById('main') as HTMLDivElement
     const type = location.pathname.split("/").pop() === "movies" ? "movie" : "tv";
-    const view = new match.route.view(main, match.route.type ?? type);
+    const view = new match.route.view(main, (match.route.type ?? type) as "movie"|"tv");
     const searchEl = document.getElementById("search") as HTMLInputElement;
     searchEl["onsearch"] = view.handleSearchEvent;
 

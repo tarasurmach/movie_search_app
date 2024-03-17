@@ -18,11 +18,11 @@ export const URLS = {
 
 export class LocalStorage {
     static addToStorage(arr: string[], type:"movie"|"tv") {
-    return localStorage.setItem(type, JSON.stringify(arr))
+        return localStorage.setItem(type, JSON.stringify(arr))
     }
     static getFromStorage(key: string): string[] {
-    const value = (localStorage.getItem(`${key}`));
-    if(value === null) return [];
-    return JSON.parse(value) ?? [];
+        const value = (localStorage.getItem(`${key}`));
+        if(value === null) return [];
+        return JSON.parse(value) ?? [];
     }
 }

@@ -17,6 +17,7 @@ export class Abstract implements View {
     }
     handleSearchEvent = (e:Event)=> {
             e.preventDefault();
+
             console.log(e.target);
             const target = e.currentTarget as HTMLInputElement;
             if(!target.value) {
