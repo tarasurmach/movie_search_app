@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <base href="/"/>
+  </head>
+  <body>
+  <header>
+
+      <input required type="search" placeholder="Search..." id="search" class="search fa-light fa-magnifying-glass">
+
+  </header>
+
+    <div id="app">
+
+        <nav class="nav">
+          <ul>
+            <li><a href="/movies" class="nav__link" data-link>Movies</a></li>
+            <li><a href="/series" class="nav__link" data-link>Series</a></li>
+
+            <li><a href="/favorites/movies" class="nav__link" data-link>Favorites</a></li>
+            <li id="fav">
+              <label>
+                <select id="select" class="par">
+
+                  <option selected value="/movies" >Movies</option>
+                  <option value="/series">Series </option>
+                </select>
+              </label>
+            </li>
+          </ul>
+        </nav>
+
+
+
+
+      <main id="main">
+
+      </main>
+    </div>
+    <script defer type="module" src="frontend/static/ts/index.ts"></script>
+  <!--<script type="module" src="
+https://cdn.jsdelivr.net/npm/vite-plugin-cdn-import-async@1.0.10/dist/index.min.js
+"></script>-->
+
+  </body>
+</html>
