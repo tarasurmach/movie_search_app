@@ -60,7 +60,7 @@ export class Abstract implements View {
                 throw new Error("Request failed. Error status: " + response.status);
             }
             return response.json()
-        }).then(data =>{
+        }).then(data => {
             this.renderUI(data.results)
         }).catch((e:unknown)=>{
             if(e instanceof Error) {

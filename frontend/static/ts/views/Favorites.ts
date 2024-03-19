@@ -22,7 +22,7 @@ export class Favorites extends Abstract  {
 
         })).then(results=> {
             this.results = results.map((el:any & {value:any})=> el?.value);
-            this.renderUI(this.results)
+            super.renderUI(this.results)
         });
     }
     handleSearchEvent = (e:Event) => {
