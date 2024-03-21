@@ -22,6 +22,7 @@ export type TV = {
     type:"tv",
     name:string
 }
+
 export const sortOptions:Record<string, string> = {
     dateAdded:"Date Added",
     vote_average:"Rating",

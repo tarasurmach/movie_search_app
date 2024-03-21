@@ -49,8 +49,14 @@ export class Favorites extends Abstract  {
                    return dateB > dateA ? 1 : -1;
                }
                case "title" : {
-                   const isTV = a.type === "tv" && b.type ==="tv"
-                   return isTV ? a.name.localeCompare(b.name) : a.title.localeCompare(b.title)
+                   const isTV = a.type === "tv" && b.type ==="tv";
+                   const isMovie = a.type === "movie" && b.type ==="movie"
+                   if(isTV) {
+                       return a.name.localeCompare(b.name)
+                   }else if(isMovie) {
+                       return a.title.localeCompare(b.title)
+                   }
+                   return 1;
                }
                case "vote_average" : {
                    return a.vote_average > b.vote_average ? -1 : 1;
@@ -65,6 +71,7 @@ export class Favorites extends Abstract  {
         const container =  super.renderUI(data);
         const div = document.createElement("div");
         const selectEl = document.createElement("select");
+        selectEl.className = "select"
         let options = ""
         for (let key in sortOptions) {
             options += `<option value="${key}">${sortOptions[key]}</option>`
