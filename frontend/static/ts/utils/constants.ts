@@ -5,9 +5,28 @@ const API_KEY = 'api_key=8beb1318b1c6bd8b3265412ef837fcf4';
 
 export type MovieInfo = {
     id:string,
-    dateAdded:string
-}
+    dateAdded:string,
 
+}
+export type Base = {
+    overview:string,
+    dateAdded:string,
+    vote_average:number
+
+} & (Movie | TV)
+export type Movie = {
+    type:"movie",
+    title:string
+}
+export type TV = {
+    type:"tv",
+    name:string
+}
+export const sortOptions:Record<string, string> = {
+    dateAdded:"Date Added",
+    vote_average:"Rating",
+    title:"Title (A-Z)"
+}
 export const URLS = {
     POPULAR_API(type:"tv"|"movie") {
         return BASE_URL + `/${type}/popular?` + API_KEY

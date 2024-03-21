@@ -27,19 +27,26 @@ const updateNavbar = (url:string) => {
 }
 const router = () => {
     let match= {
-        route:routes[1], isMatch: true
+        route:routes[1], isMatch: true, type:"movie"
     };
     routes.forEach(route => {
-        if((route.path.includes("favorites") && location.pathname.includes("favorites")) || route.path === location.pathname) {
+        if(route.path.includes("favorites") && location.pathname.includes("favorites")) {
             match = {
                 route,
-                isMatch: true
+                isMatch: true,
+                type:(location.pathname.split("/").pop() === "movies" ? "movie" : "tv") as string
+            }
+        }
+        if(route.path === location.pathname) {
+            match = {
+                route,
+                isMatch: true,
+                type:route.type as string
             }
         }
     })
     let main:HTMLDivElement = document.getElementById('main') as HTMLDivElement
-    const type = location.pathname.split("/").pop() === "movies" ? "movie" : "tv";
-    const view = new match.route.view(main, (match.route.type ?? type) as "movie"|"tv");
+    const view = new match.route.view(main, (match.type ) as "movie"|"tv");
     const searchEl = document.getElementById("search") as HTMLInputElement;
     searchEl["onsearch"] = view.handleSearchEvent;
 

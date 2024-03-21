@@ -77,13 +77,16 @@ aside {
   background: #373b69;
 }
 main{
+
+
+
+}
+.movies-container {
   display:flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   flex-grow: 1;
   flex-direction: row;
-
-
 }
 
 .movie {

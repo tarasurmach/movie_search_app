@@ -1,7 +1,8 @@
 import View from "../types.js";
 import {Favorite} from "../utils/Favorite.js";
 import {URLS} from "../utils/constants.js";
-export type MediaType = "tv"|"movie"
+export type MediaType = "tv"|"movie";
+
 export class Abstract implements View {
     protected favorite:Favorite;
     protected constructor(protected mainEl:HTMLDivElement, protected type:MediaType) {
@@ -12,7 +13,6 @@ export class Abstract implements View {
 
     setTitle() {
         const [_, title] = location.pathname.split("/");
-        console.log(title)
         document.title = title.charAt(0).toUpperCase() + title.slice(1);
     }
     handleSearchEvent = (e:Event)=> {
@@ -27,16 +27,23 @@ export class Abstract implements View {
             this.fetchMovies(URLS.SEARCH_URL(this.type, target.value));
             target.value = '';
 
+    }
+    renderMovies(data:any[]) {
+        let cont = this.mainEl.querySelector(".movies-container");
+        if(!cont) {
+            cont = document.createElement("div");
+            cont.className = "movies-container"
+        }else {
+            cont.innerHTML = ""
         }
-    renderUI(data:any[]) {
-        this.mainEl.innerHTML = '';
-        data.reduce((accum:HTMLDivElement, item:any) => {
+
+        return data.reduce((accum:HTMLDivElement, item:any) => {
             let {id, title, poster_path, vote_average, overview, name, profile_path, backdrop_path, media_type} = item;
             if(!title){ title = name}
             const movieEl = document.createElement('div');
             movieEl.classList.add('movie')
             movieEl.innerHTML = `
-        <span id="like"  data-id=${id} data-type=${media_type ?? this.type} class="${this.favorite.liked.includes(`${id}`)?"dislike fa fa-thumbs-down":"like fa fa-thumbs-up"}"></span>
+        <span id="like"  data-id=${id} data-type=${media_type ?? this.type} class="${this.favorite.isLiked(id) ? "dislike fa fa-thumbs-down":"like fa fa-thumbs-up"}"></span>
         <img src="${(URLS.IMG_URL + (poster_path??profile_path??backdrop_path))}" alt="${title}">
         
         <div class="movie-info">
@@ -50,8 +57,13 @@ export class Abstract implements View {
         `
             accum.appendChild(movieEl);
             return accum
-        }, this.mainEl);
-        return this.mainEl;
+        }, cont);
+    }
+    renderUI(data:any[]) {
+        this.mainEl.innerHTML = '';
+        const moviesCont = this.renderMovies(data)
+        this.mainEl.innerHTML = moviesCont.outerHTML;
+        return moviesCont;
     }
 
     fetchMovies(url:string) {
